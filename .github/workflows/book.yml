@@ -1,0 +1,54 @@
+name: Prenota corsi Fit Express
+
+on:
+  schedule:
+    - cron: "25 21 * * *"
+    - cron: "25 22 * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "dry-run = solo verifica (non prenota); now = prenota subito"
+        required: true
+        default: dry-run
+        type: choice
+        options: [dry-run, now]
+
+concurrency:
+  group: fitexpress-book
+  cancel-in-progress: false
+
+jobs:
+  book:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Prenota
+        env:
+          FITEXPRESS_EMAIL: ${{ secrets.FITEXPRESS_EMAIL }}
+          FITEXPRESS_PASSWORD: ${{ secrets.FITEXPRESS_PASSWORD }}
+          TZ: Europe/Rome
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python book.py --${{ inputs.mode }} $([ "${{ inputs.mode }}" = "dry-run" ] && echo --now)
+          else
+            python book.py
+          fi
+      - name: Mantieni attivo
+        if: github.event_name == 'schedule'
+        env:
+          TZ: Europe/Rome
+        run: |
+          if [ "$(date +%d)" = "01" ]; then
+            date > keepalive.txt
+            git config user.name "bot"
+            git config user.email "bot@users.noreply.github.com"
+            git add keepalive.txt
+            git commit -m "keepalive" && git push || true
+          fi

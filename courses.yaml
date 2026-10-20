@@ -1,0 +1,20 @@
+# Corsi da prenotare ogni settimana.
+# name: titolo esatto come nell'app (maiuscole/minuscole non contano)
+# weekday: lunedi, martedi, mercoledi, giovedi, venerdi, sabato, domenica
+# start: orario di inizio HH:MM (ora italiana)
+# waiting_list: true = se il corso e' pieno, mettiti in lista d'attesa
+courses:
+  - {name: POSTURALE, weekday: lunedi, start: "09:00", waiting_list: true}
+  - {name: GAG, weekday: lunedi, start: "10:00", waiting_list: true}
+  - {name: PILATES, weekday: lunedi, start: "11:00", waiting_list: true}
+  - {name: AB BLASTER, weekday: martedi, start: "09:00", waiting_list: true}
+  - {name: TOTAL BODY, weekday: martedi, start: "10:00", waiting_list: true}
+  - {name: HATHA YOGA, weekday: martedi, start: "11:00", waiting_list: true}
+  - {name: HATHA YOGA, weekday: mercoledi, start: "09:00", waiting_list: true}
+  - {name: GAG, weekday: mercoledi, start: "10:00", waiting_list: true}
+  - {name: POSTURALE, weekday: mercoledi, start: "11:00", waiting_list: true}
+  - {name: MOBILITY, weekday: giovedi, start: "09:00", waiting_list: true}
+  - {name: TOTAL BODY, weekday: giovedi, start: "10:00", waiting_list: true}
+  - {name: PILATES, weekday: giovedi, start: "11:00", waiting_list: true}
+  - {name: PILATES, weekday: venerdi, start: "09:00", waiting_list: true}
+  - {name: GINNASTICA DOLCE, weekday: sabato, start: "09:00", waiting_list: true}

@@ -17,7 +17,7 @@ DAYS_AHEAD = 2            # alla mezzanotte del giorno D si apre D+2
 LEAD = 0.15               # s: invia il primo tentativo appena prima della mezzanotte server
 RETRY = 0.25              # s tra tentativi
 MAX_RETRY_S = 180
-MAX_WAIT_S = 12 * 3600     # non attendere piu' di 6 ore
+MAX_WAIT_S = 5.5 * 3600     # troppo presto (>2h alla mezzanotte)
 WD = {"lunedi":0,"martedi":1,"mercoledi":2,"giovedi":3,"venerdi":4,"sabato":5,"domenica":6,
       "monday":0,"tuesday":1,"wednesday":2,"thursday":3,"friday":4,"saturday":5,"sunday":6}
 

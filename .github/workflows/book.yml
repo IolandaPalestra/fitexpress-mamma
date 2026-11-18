@@ -2,8 +2,9 @@ name: Prenota corsi Fit Express
 
 on:
   schedule:
-    - cron: "17 18 * * *"   # 19:17 CET (inverno) / 20:17 CEST (estate)
-    - cron: "17 19 * * *"   # 20:17 CET / 21:17 CEST
+    # Partono alle 14:00 per avere ampio margine sui ritardi di GitHub
+    - cron: "0 13 * * *"   # 14:00 ora legale (CEST)
+    - cron: "0 14 * * *"   # 14:00 ora solare (CET)
   workflow_dispatch:
     inputs:
       mode:
@@ -20,7 +21,7 @@ concurrency:
 jobs:
   book:
     runs-on: ubuntu-latest
-    timeout-minutes: 350
+    timeout-minutes: 720
     permissions:
       contents: write
     steps:
